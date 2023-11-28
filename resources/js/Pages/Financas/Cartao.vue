@@ -1,5 +1,5 @@
 <template>
-    <div class="container p-5" style="background-color: #BDFA7C;">
+    <div class="container p-5">
         <Header></Header>
 
         <div class="col-sm-12 m-5 p-5">
@@ -12,48 +12,30 @@
             <div v-for="cartao in cartaos" class="row">
                 <div class="col-sm-2 m-3 mt-5 me-5">
                     <div class="row" style="height:100px;">
-                        <button @click="mostrarCartao(cartao)" class="btn btn-secondary border-0"
-                        style="background-color: #E0D56E; height: 160px;">
+                        <button @click="mostrarCartao(cartao)" class="btn btn-secondary border-0
+                        bg-black">
                             <svg xmlns="http://www.w3.org/2000/svg"
                             width="30" height="30" fill="black" class="bi bi-credit-card-2-back" viewBox="0 0 16 16">
                                 <path d="M11 5.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1-.5-.5v-1z"/>
                                 <path d="M2 2a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H2zm13 2v5H1V4a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1zm-1 9H2a1 1 0 0 1-1-1v-1h14v1a1 1 0 0 1-1 1z"/>
                               </svg>
                               <small class="justify-content-center
-                              mt-2 fs-2 fw-light text-dark
+                              mt-2 fs-2 fw-light text-white
                               d-flex align-items-center">
                                   {{ cartao.nome }}
                               </small>
                         </button>
                     </div>
 
-                    <div class="row">
-                        <button type="button"
-                        class="btn btn-danger" @click="deletarCartao(cartao.id)">
-                            deletar
-                        </button>
 
-                        <button @click="this.cartao.nome = cartao.nome
-                        this.cartao.numero = cartao.numero;
-                        this.cartao.validade = cartao.validade;
-                        this.cartao.cvv = cartao.cvv;
-                        this.cartao.proprietario = cartao.proprietario;
-                        this.cartao.id = cartao.id"
-                        type="button" class="btn btn-primary"
-                        data-bs-toggle="modal"
-                        data-bs-target="#atualizarCartaoModal">
-                            atualizar
-                        </button>
-                    </div>
                 </div>
             </div>
             <div class="col-sm-2 m-3 mt-5 me-5">
-                <div class="row" style="height:100px;">
+                <div class="row">
                     <button
                     class="btn btn-primary"
                     data-bs-toggle="modal"
-                    data-bs-target="#novoCartaoModal"
-                    style="background-color: #E0D56E; height: 160px;">
+                    data-bs-target="#novoCartaoModal">
                         <svg xmlns="http://www.w3.org/2000/svg"
                         width="60" height="60" fill="black" class="bi bi-plus-circle" viewBox="0 0 16 16">
                             <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
@@ -70,7 +52,7 @@
             align-items-center justify-content-center
             mt-5">
                 <div class="col-sm-5">
-                    <div class="card-body justify-content-center mb-5 rounded" style="height: 250px;  background-color: #E0D56E;">
+                    <div class="card-body justify-content-center mb-5 rounded bg-black">
                         <div class="row mb-5 m-5">
                             <div class="col-sm-12 p-4">
                                 <div class="fs-3 row m-2 justify-content-center
@@ -115,7 +97,7 @@
             align-items-center justify-content-center
             mt-5">
                 <div class="col-sm-5">
-                    <div class="card-body rounded justify-content-center mb-5" style="height: 250px; background-color: #E0D56E;">
+                    <div class="card-body rounded justify-content-center mb-5 bg-black">
                         <div class="row mb-5 m-5">
                             <div class="col-sm-12 p-4">
                                 <div class="row justify-content-center fs-3
@@ -148,6 +130,23 @@
                                 d="M8 3c-1.552 0-2.94.707-3.857 1.818a.5.5 0 1 1-.771-.636A6.002 6.002 0 0 1 13.917 7H12.9A5.002 5.002 0 0 0 8 3zM3.1 9a5.002 5.002 0 0 0 8.757 2.182.5.5 0 1 1 .771.636A6.002 6.002 0 0 1 2.083 9H3.1z" />
                         </svg>
                     </button>
+
+                    <button type="button"
+                        class="btn btn-danger" @click="deletarCartao(cartao.id)">
+                            Deletar
+                        </button>
+
+                        <button @click="this.cartao.nome = cartao.nome
+                        this.cartao.numero = cartao.numero;
+                        this.cartao.validade = cartao.validade;
+                        this.cartao.cvv = cartao.cvv;
+                        this.cartao.proprietario = cartao.proprietario;
+                        this.cartao.id = cartao.id"
+                        type="button" class="btn btn-primary"
+                        data-bs-toggle="modal"
+                        data-bs-target="#atualizarCartaoModal">
+                            Atualizar
+                        </button>
                 </div>
             </div>
         </div>

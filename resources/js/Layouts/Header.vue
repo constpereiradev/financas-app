@@ -19,16 +19,18 @@ export default {
 
     methods: {
         carteira(){
-            axios.get('financas.carteira');
+            //axios.get(route('financas.carteira'));
+
+            window.location.href = 'http://127.0.0.1:8000/carteira';
         },
         extrato(){
-            axios.get(route('financas.extrato'));
+            window.location.href = 'http://127.0.0.1:8000/extratos';
         },
         despesas(){
-                axios.get(route('financas.despesas'));
+            window.location.href = 'http://127.0.0.1:8000/despesas';
         },
         cartoes(){
-            axios.get(route('financas.cartao'));
+            window.location.href = 'http://127.0.0.1:8000/cartao';
         },
 
     }

@@ -1,8 +1,6 @@
 <template>
 
-    <div class="container p-5" style="background-color: #BDFA7C;">
-
-        <Bootstrap></Bootstrap>
+    <div class="container p-5">
 
         <div class="col-sm-12 m-5 p-5">
             <div class="row">
@@ -17,7 +15,9 @@
                 </div>
 
                 <div class="col-sm-9">
-                    <button class="btn">
+                    <button @click="this.carteira.id = carteira.id" class="btn"
+                        data-bs-toggle="modal"
+                        data-bs-target="#atualizarCarteiraModal">
                         <svg xmlns="http://www.w3.org/2000/svg"
                         width="30" height="30"
                         fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
@@ -92,19 +92,65 @@
             </div>
         </div>
     </div>
+
+    <!-- Modal para atualizar carteira -->
+    <div class="modal fade" id="atualizarCarteiraModal"
+    tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">
+                        Atualizar carteira
+                    </h1>
+                    <button type="button" class="btn-close"
+                    data-bs-dismiss="modal" aria-label="Close">
+                    </button>
+                </div>
+
+                <div class="modal-body">
+                    <div class="col-sm-12">
+                        <div class="row mb-3">
+                            <div class="col-sm-12">
+                                <label class="form-label">
+                                    Saldo da carteira
+                                </label>
+                                <input type="text" name=""
+                                id="valorCarteira"
+                                v-model="this.carteira.saldo"
+                                class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button @click="this.carteira.saldo = ''"
+                    type="button" class="btn btn-secondary fw-bold"
+                    data-bs-dismiss="modal">
+                        Fechar
+                    </button>
+
+                    <button @click="atualizarSaldo(this.carteira.id)"
+                    type="button"
+                    class="btn btn-success fw-bold">
+                        Atualizar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
 </template>
 
 <script>
 
 import { defineComponent } from 'vue';
 import axios from 'axios';
-import Bootstrap from '@/Layouts/Bootstrap.vue';
 
 
 export default defineComponent({
 
    components:{
-        Bootstrap
+
    },
    mounted() {
         //this.atualizarSaldo();
@@ -119,14 +165,17 @@ export default defineComponent({
                 });
                 */
             },
+
             extrato(){
-                axios.get(route('financas.extrato'));
+                window.location.href = 'http://127.0.0.1:8000/extratos';
             },
+
             despesas(){
-                axios.get(route('financas.despesas'));
+                window.location.href = 'http://127.0.0.1:8000/despesas';
             },
+
             cartoes(){
-                axios.get(route('financas.cartao'));
+                window.location.href = 'http://127.0.0.1:8000/cartao';
             },
         },
    data(){

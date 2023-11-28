@@ -1,6 +1,6 @@
 <template>
 
-    <div class="container p-5" style="background-color: #BDFA7C;">
+    <div class="container p-5">
 
         <Header></Header>
         <div class="col-sm-12 mt-5 mb-5">
