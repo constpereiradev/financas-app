@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\FinancasController;
 use App\Http\Controllers\DespesaController;
+use App\Http\Controllers\CartaoController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -49,6 +50,13 @@ Route::middleware('auth')->group(function () {
     Route::post('/criar/despesa', [DespesaController::class, 'store'])->name('despesas.store');
     Route::patch('/atualizar/despesa/{id}', [DespesaController::class, 'update'])->name('despesas.update');;
     Route::delete('/deletar/despesa/{id}', [DespesaController::class, 'destroy'])->name('despesas.destroy');
+});
+
+Route::middleware('auth')->group(function () {
+    Route::get('/cartao/todos', [CartaoController::class, 'index'])->name('cartao');
+    Route::post('/criar/cartao', [CartaoController::class, 'store'])->name('cartao.store');
+    Route::patch('/atualizar/cartao/{id}', [CartaoController::class, 'update'])->name('cartao.update');;
+    Route::delete('/deletar/cartao/{id}', [CartaoController::class, 'destroy'])->name('cartao.destroy');
 });
 
 require __DIR__.'/auth.php';

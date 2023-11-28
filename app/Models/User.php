@@ -10,6 +10,7 @@ use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 use App\Models\Despesa;
+use App\Models\Cartao;
 
 class User extends Authenticatable
 {
@@ -54,5 +55,10 @@ class User extends Authenticatable
     public function despesas(): HasMany
     {
         return $this->hasMany(Despesa::class);
+    }
+
+    public function cartaos(): HasMany
+    {
+        return $this->hasMany(Cartao::class);
     }
 }

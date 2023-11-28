@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use App\Models\Despesa;
+use App\Models\Cartao;
+
 
 class FinancasController extends Controller
 {
@@ -15,7 +17,9 @@ class FinancasController extends Controller
     }
 
     public function cartao(){
-        return Inertia::render('Financas/Cartao');
+        return Inertia::render('Financas/Cartao', [
+            'cartaos' => Cartao::with('user')->get(),
+        ]);
     }
 
     public function extrato(){

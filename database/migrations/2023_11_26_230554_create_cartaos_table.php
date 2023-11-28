@@ -13,6 +13,13 @@ return new class extends Migration
     {
         Schema::create('cartaos', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->string('nome');
+            $table->string('numero');
+            $table->string('validade');
+            $table->string('cvv');
+            $table->string('proprietario');
             $table->timestamps();
         });
     }
