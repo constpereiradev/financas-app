@@ -11,7 +11,9 @@ class DespesaController extends Controller
     public function index(){
         $despesas = Despesa::with('user')->get();
 
-        return $despesas;
+        return response()->json([
+            'Despesas' => $despesas,
+        ]);
     }
 
     public function store(Request $request)
@@ -25,15 +27,16 @@ class DespesaController extends Controller
 
     }
 
-    public function update(Request $request, Despesa $despesa)
+    public function update(Request $request, Despesa $id)
     {
-        $despesa->update($request->all());
-        return response()->json($despesa, 200);
+        $id->update($request->all());
+        return response()->json($id, 200);
     }
 
-    public function destroy(Despesa $despesa)
+    public function destroy($id)
     {
-        $despesa->delete();
-        return response()->json(null, 204);
+
+        Despesa::destroy($id);
+
     }
 }

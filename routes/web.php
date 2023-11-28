@@ -47,8 +47,8 @@ Route::middleware('auth')->group(function () {
 Route::middleware('auth')->group(function () {
     Route::get('/despesas/todas', [DespesaController::class, 'index'])->name('despesas');
     Route::post('/criar/despesa', [DespesaController::class, 'store'])->name('despesas.store');
-    Route::patch('/atualizar/despesa', [DespesaController::class, 'update'])->name('despesas.update');;
-    Route::delete('/deletar/despesa', [DespesaController::class, 'destroy'])->name('despesas.destroy');
+    Route::patch('/atualizar/despesa/{id}', [DespesaController::class, 'update'])->name('despesas.update');;
+    Route::delete('/deletar/despesa/{id}', [DespesaController::class, 'destroy'])->name('despesas.destroy');
 });
 
 require __DIR__.'/auth.php';
