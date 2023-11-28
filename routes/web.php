@@ -45,8 +45,8 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::middleware('auth')->group(function () {
-    Route::get('/despesas', [DespesaController::class, 'index'])->name('despesas');
-    Route::put('/criar/despesa', [DespesaController::class, 'store'])->name('despesas.store');
+    Route::get('/despesas/todas', [DespesaController::class, 'index'])->name('despesas');
+    Route::post('/criar/despesa', [DespesaController::class, 'store'])->name('despesas.store');
     Route::patch('/atualizar/despesa', [DespesaController::class, 'update'])->name('despesas.update');;
     Route::delete('/deletar/despesa', [DespesaController::class, 'destroy'])->name('despesas.destroy');
 });

@@ -16,8 +16,13 @@ class DespesaController extends Controller
 
     public function store(Request $request)
     {
-        $despesa = Despesa::create($request->all());
-        return response()->json($despesa, 201);
+        try {
+            $despesa = Despesa::create($request->all());
+            return response()->json($despesa, 201);
+        } catch (\Exception $th) {
+            return $th;
+        }
+
     }
 
     public function update(Request $request, Despesa $despesa)

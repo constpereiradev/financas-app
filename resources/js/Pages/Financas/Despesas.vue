@@ -1,6 +1,5 @@
 
 <template>
-
     <div class="container p-5" style="background-color: #BDFA7C;">
 
         <Header></Header>
@@ -27,24 +26,37 @@
                         <small class="justify-content-center
                           mt-2 fs-3 fw-lighter text-dark
                           d-flex align-items-center">
-                              R$ {{ despesa.valor }}
+                            Nome: {{ despesa.nome }}
                         </small>
 
                         <small class="justify-content-center
                           mt-2 fs-3 fw-normal text-dark
                           d-flex align-items-center">
-                            {{ despesa.frequencia }}
+                            R$:{{ despesa.valor }}
+                        </small>
+
+                        <small class="justify-content-center
+                          mt-2 fs-3 fw-normal text-dark
+                          d-flex align-items-center">
+                            Frequência: {{ despesa.frequencia }}
+                        </small>
+
+                        <small class="justify-content-center
+                          mt-2 fs-3 fw-normal text-dark
+                          d-flex align-items-center">
+                            Descrição: {{ despesa.descricao }}
                         </small>
                     </button>
                 </div>
             </div>
 
-
-
             <div class="col-sm-2 ms-5 mt-5" style="height: fit-content;">
                 <div class="row" style="height:100px;">
-                    <button @click="adicionarDespesa" class="btn btn-secondary
-                    border-0 p-3"
+                    <button type="button"
+                    class="btn btn-primary"
+                    data-bs-toggle="modal"
+                    data-bs-target="#exampleModal"
+                    border-0 p-3
                     style="background-color: #E0D56E; height: 160px;">
                     <svg xmlns="http://www.w3.org/2000/svg"
                     width="50" height="50" fill="black" class="bi bi-plus-circle" viewBox="0 0 16 16">
@@ -60,35 +72,91 @@
                 </div>
             </div>
 
-            <!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-    Launch demo modal
-  </button>
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModal"
+            tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">
+                            Cadastre sua nova despesa
+                        </h1>
+                        <button type="button" class="btn-close"
+                        data-bs-dismiss="modal" aria-label="Close">
+                        </button>
+                    </div>
 
-  <!-- Modal -->
-  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          ...
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
-        </div>
-      </div>
-    </div>
-  </div>
+                    <div class="modal-body">
+                        <div class="col-sm-12">
+                            <div class="row mb-3">
+                                <div class="col-sm-6">
+                                    <label class="form-label">
+                                        Nome da despesa
+                                    </label>
+                                    <input type="text" name=""
+                                    id="nomeDespesa"
+                                    v-model="despesa.nome"
+                                    class="form-control">
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <label class="form-label">
+                                        Valor da despesa
+                                    </label>
+                                    <input type="number" name=""
+                                    id="valorDespesa"
+                                    v-model="despesa.valor"
+                                    class="form-control">
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <div class="col-sm-12">
+                                    <label class="form-label">
+                                        Frequência da despesa
+                                    </label>
+                                    <input type="text" name=""
+                                    id="frequenciaDespesa"
+                                    v-model="despesa.frequencia"
+                                    class="form-control">
+                                </div>
+
+                            </div>
+
+                            <div class="row mb-3">
+                                <div class="col-sm-12">
+                                    <label class="form-label">
+                                        Descrição da despesa (Opcional)
+                                    </label>
+                                    <input type="text" name=""
+                                    id="descricaoDespesa"
+                                    v-model="despesa.descricao"
+                                    class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary"
+                        data-bs-dismiss="modal">
+                            Fechar
+                        </button>
+                        <button @click="adicionarDespesa"
+                        type="button"
+                        class="btn btn-primary">
+                            Salvar
+                        </button>
+                    </div>
+                </div>
+                </div>
+            </div>
 
 
            </div>
         </div>
     </div>
-    <Bootstrap></Bootstrap>
+
 </template>
 
 <script>
@@ -96,24 +164,35 @@
 import { defineComponent } from 'vue';
 import Header from '@/Layouts/Header.vue';
 import axios from 'axios';
-import Bootstrap from '@/Layouts/Bootstrap.vue';
+
 
 
 export default defineComponent({
 
    components:{
         Header,
-        Bootstrap,
+
    },
    props: ['despesas'],
    methods: {
         adicionarDespesa(){
-            alert('Funcionalidade em breve...');
+            axios.post(route('despesas.store', {
+                user_id: this.$page.props.auth.user.id,
+                nome: this.despesa.nome,
+                valor: this.despesa.valor,
+                frequencia: this.despesa.frequencia,
+                descricao: this.despesa.descricao,
+            }))
         }
    },
    data(){
        return{
-
+            despesa: {
+                nome: '',
+                valor: '',
+                frequencia: '',
+                descricao: '',
+            }
        }
    },
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Inertia\Inertia;
+use App\Models\Despesa;
 
 class FinancasController extends Controller
 {
@@ -22,6 +23,10 @@ class FinancasController extends Controller
     }
 
     public function despesas(){
-        return Inertia::render('Financas/Despesas');
+
+
+        return Inertia::render('Financas/Despesas', [
+            'despesas' => Despesa::with('user')->get(),
+        ]);
     }
 }
