@@ -12,6 +12,10 @@ class FinancasController extends Controller
 {
     //
 
+    public function index(){
+        return Inertia::render('Financas/Index');
+    }
+
     public function carteira(){
         return Inertia::render('Financas/Carteira');
     }

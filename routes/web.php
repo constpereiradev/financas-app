@@ -39,6 +39,7 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::middleware('auth')->group(function () {
+
     Route::get('/carteira', [FinancasController::class, 'carteira'])->name('financas.carteira');
     Route::get('/despesas', [FinancasController::class, 'despesas'])->name('financas.despesas');
     Route::get('/cartao', [FinancasController::class, 'cartao'])->name('financas.cartao');
@@ -58,5 +59,7 @@ Route::middleware('auth')->group(function () {
     Route::patch('/atualizar/cartao/{id}', [CartaoController::class, 'update'])->name('cartao.update');;
     Route::delete('/deletar/cartao/{id}', [CartaoController::class, 'destroy'])->name('cartao.destroy');
 });
+
+Route::get('/financas', [FinancasController::class, 'index'])->name('financas.index');
 
 require __DIR__.'/auth.php';
